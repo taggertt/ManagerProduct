@@ -16,15 +16,30 @@ public class Repository {
         return products;
     }
 
-    public void deleteById(int id) {
-        Product[] tmp = new Product[products.length - 1];
-        int copyToIndex = 0;
-        for (Product product : products) {
-            if (product.getId() != id) {
-                tmp[copyToIndex] = product;
-                copyToIndex++;
+    public void deleteById(int id) throws NotFoundException {
+        if (findById(id) == null) {
+            throw new NotFoundException(
+                    "Element with id: " + id + "not found"
+            );
+        } else {
+            Product[] tmp = new Product[products.length - 1];
+            int copyToIndex = 0;
+            for (Product product : products) {
+                if (product.getId() != id) {
+                    tmp[copyToIndex] = product;
+                    copyToIndex++;
+                }
+                products = tmp;
             }
-            products = tmp;
         }
+    }
+
+    public Product findById(int id) {
+        for (Product product : products) {
+            if (product.id == id) {
+                return product;
+            }
+        }
+        return null;
     }
 }
