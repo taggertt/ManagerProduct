@@ -26,19 +26,26 @@ public class ProductManager {
     public Product[] searchBy(String text) {
         Product[] result = new Product[0];
         int copyToIndex = 0;
-        for (Product product: repo.getProducts())
+        int elements = 0;
+        for (Product product : repo.getProducts()) {
             if (matches(product, text)) {
-                result = new Product[copyToIndex+1];
-                result[copyToIndex] = product;
                 copyToIndex++;
             }
+        }
+        result = new Product[copyToIndex];
+        for (Product product : repo.getProducts()) {
+            if (matches(product, text)) {
+                result[elements] = product;
+                elements++;
+            }
+        }
         return result;
     }
-    public boolean matches(Product product, String search) {
-        if (product.getName().contains(search)) {
-            return true;
-        } else {
-            return false;
+        public boolean matches (Product product, String search){
+            if (product.getName().contains(search)) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
-}
