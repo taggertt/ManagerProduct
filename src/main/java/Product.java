@@ -35,6 +35,16 @@ public class Product {
     public void setPrice(int price) {
         this.price = price;
     }
+    
+    public String getAuthor() {
+        String author = null;
+        return author;
+    }
+
+    public String getProducer() {
+        String producer = null;
+        return producer;
+    }
 
     public boolean matches(Product product, String search) {
         if (product.getName().contains(search)) {
