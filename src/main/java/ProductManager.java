@@ -28,24 +28,17 @@ public class ProductManager {
         int copyToIndex = 0;
         int elements = 0;
         for (Product product : repo.getProducts()) {
-            if (matches(product, text)) {
+            if (product.matches(product, text)) {
                 copyToIndex++;
             }
         }
         result = new Product[copyToIndex];
         for (Product product : repo.getProducts()) {
-            if (matches(product, text)) {
+            if (product.matches(product, text)) {
                 result[elements] = product;
                 elements++;
             }
         }
         return result;
     }
-        public boolean matches (Product product, String search){
-            if (product.getName().contains(search)) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
+}
