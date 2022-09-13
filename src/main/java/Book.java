@@ -16,13 +16,13 @@ public class Book extends Product {
 
     public boolean matches(Product book, String search) {
         if (super.matches(book, search)) {
-            return true;}
-            else {
-                if (book.getAuthor().contains(search)) {
-                    return true;
-                } else {
-                    return false;
-                }
+            return true;
+        } else {
+            if (((Book) book).getAuthor().contains(search)) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 }
