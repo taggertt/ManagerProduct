@@ -11,6 +11,8 @@ public class RepositoryTest {
     Product book4 = new Book(4, "manual", 150, "Popov");
     Product smartphone = new Smartphone(5, "Samsung Galaxy 5", 10_000, "Samsung");
 
+    Product smartphone1 = new Smartphone(6,"3110", 8_000, "Nokia");
+
     Repository p1 = new Repository();
 
     ProductManager pm = new ProductManager(p1);
@@ -21,6 +23,7 @@ public class RepositoryTest {
         p1.save(book2);
         p1.save(book3);
         p1.save(book4);
+        p1.save(smartphone1);
     }
 
 
@@ -28,7 +31,7 @@ public class RepositoryTest {
     public void saveProduct() {
         p1.deleteById(2);
 
-        Product[] expected = {book1, book3, book4};
+        Product[] expected = {book1, book3, book4, smartphone1};
         Product[] actual = p1.getProducts();
         Assertions.assertArrayEquals(expected, actual);
     }
@@ -55,9 +58,32 @@ public class RepositoryTest {
     }
 
     @Test
+    public void searchByProducer() {
+        pm.addProduct(smartphone);
+        Product [] expected = {smartphone};
+        Product[] actual = pm.searchBy("Samsung");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void searchByProducer1() {
+        pm.addProduct(smartphone);
+        Product [] expected = {smartphone1};
+        Product [] actual = pm.searchBy("Nokia");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void searchByAuthor() {
+        Product[] expected = {book4};
+        Product[] actual = pm.searchBy("Popov");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
     public void addRepo() {
         pm.addProduct(smartphone);
-        Product[] expected = {book1, book2, book3, book4, smartphone};
+        Product[] expected = {book1, book2, book3, book4, smartphone1,smartphone};
         Product[] actual = pm.getProducts();
         Assertions.assertArrayEquals(expected, actual);
     }

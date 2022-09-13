@@ -11,7 +11,6 @@ public class Repository {
         products = tmp;
     }
 
-
     public Product[] getProducts() {
         return products;
     }
